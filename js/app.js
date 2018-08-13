@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return x + (y * 10);
             };
             this.cells = [];
+            this.Mouse = new Mouse();
+            this.Snake = new Snake();
         }
 
         createBoard() {
@@ -24,35 +26,35 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        Snake() {
+        showSnake() {
+            this.cells[this.index(this.Snake.x, this.Snake.y)].classList.add('snake');
+        }
+
+        showMouse() {
+            this.cells[this.index(this.Mouse.x, this.Mouse.y)].classList.add('mouse');
+        }
+    }
+
+
+    class Mouse {
+        constructor() {
+            this.x = Math.floor(Math.random() * 40);
+            this.y = Math.floor(Math.random() * 40);
+        }
+    }
+
+    class Snake {
+        constructor() {
             this.x = 4;
             this.y = 4;
             this.direction = 'right';
-
-            this.cells[this.index(this.x, this.y)].classList.add('snake');
-        }
-
-        Mouse() {
-            this.x = Math.floor(Math.random() * 40);
-            this.y = Math.floor(Math.random() * 40);
-
-            this.cells[this.index(this.x, this.y)].classList.add('mouse');
         }
     }
 
-/*
-class Mouse {
-    constructor() {
-        this.x = Math.floor(Math.random() * 10);
-        this.y = Math.floor(Math.random() * 10);
-    }
-}*/
 
-
-
-const newGame = new sGame();
-newGame.createBoard();
-newGame.Snake();
-newGame.Mouse();
+    const newGame = new sGame();
+    newGame.createBoard();
+    newGame.showMouse();
+    newGame.showSnake();
 
 })
