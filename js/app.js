@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.height = 20;
             this.board = document.querySelector('.board');
             this.index = (x, y) => {
-                return x + (y * 10);
+                return x + (y * 20);
             };
             this.cells = [];
             this.Mouse = new Mouse();
@@ -27,19 +27,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         showSnake() {
+
+            let self = this;
             this.cells[this.index(this.Snake.x, this.Snake.y)].classList.add('snake');
+
+
         }
 
         showMouse() {
             this.cells[this.index(this.Mouse.x, this.Mouse.y)].classList.add('mouse');
         }
+
+        toggleSnake() {
+            let snakeDivs = document.querySelector(".snake");
+            snakeDivs.classList.remove('snake');
+        };
+
+        eatMouse (){
+            if (this.Snake.x === this.Mouse.x && this.Snake.y === this.Mouse.y){
+                document.querySelector('.mouse').classList.remove('mouse');
+                document.querySelector('h2').innerText++;
+                this.Snake.total++;
+                this.Mouse = new Mouse();
+                this.showMouse();
+                this.Snake.tail.push()
+              //  Mouse.showMouse();
+            }
+        };
+
+        turnSnakeHead(event) {
+            switch (event.which) {
+                case 37:
+                    this.Snake.direction = 'left';
+                    break;
+                case 39:
+                    this.Snake.direction = 'right';
+                    break;
+                case 38:
+                    this.Snake.direction = 'top';
+                    break;
+                case 40:
+                    this.Snake.direction = 'down';
+                    break;
+            }
+        }
+
+        moveSnake() {
+            switch (this.Snake.direction) {
+                case 'right':
+                    this.Snake.x = this.Snake.x + 1;
+                    break;
+                case 'left':
+                    this.Snake.x = this.Snake.x - 1;
+                    break;
+                case 'top':
+                    this.Snake.y = this.Snake.y - 1;
+                    break;
+                case 'down':
+                    this.Snake.y = this.Snake.y + 1;
+                    break;
+            }
+
+            this.toggleSnake();
+            this.showSnake();
+            this.eatMouse();
+        }
+
+        startGame() {
+            let self = this;
+            this.idSetInterval = setInterval(function () {
+                self.moveSnake()
+            }, 250);
+        };
     }
 
 
     class Mouse {
         constructor() {
-            this.x = Math.floor(Math.random() * 40);
-            this.y = Math.floor(Math.random() * 40);
+            this.x = Math.floor(Math.random() * 20);
+            this.y = Math.floor(Math.random() * 20);
         }
     }
 
@@ -48,13 +114,25 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x = 4;
             this.y = 4;
             this.direction = 'right';
+            this.total = 0;
+            this.tail = [];
         }
     }
+
+    /*class SnakeTail {
+        constructor(){
+            this.tail = [84,83,82];
+        }
+    }*/
 
 
     const newGame = new sGame();
     newGame.createBoard();
     newGame.showMouse();
     newGame.showSnake();
+    newGame.startGame();
 
-})
+    document.addEventListener('keydown', function (event){
+        newGame.turnSnakeHead(event);
+    });
+});
