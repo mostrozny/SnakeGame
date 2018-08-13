@@ -79,6 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.Snake.direction = 'down';
                     break;
             }
+            switch (event.type) {
+                case 'panleft':
+                    this.Snake.direction = 'left';
+                    break;
+                case 'panright':
+                    this.Snake.direction = 'right';
+                    break;
+                case 'panup':
+                    this.Snake.direction = 'top';
+                    break;
+                case 'pandown':
+                    this.Snake.direction = 'down';
+                    break;
+            }
+
         }
 
         moveSnake() {
@@ -136,13 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('keydown', function (event){
         newGame.turnSnakeHead(event);
+        console.log(event);
     });
 
-    const hammertime = new Hammer(document);
-    hammertime.on('swipeleft', function(ev) {
-        document.querySelector('h2').innerText = '000';
-        console.log('blablabla');
-        console.log(ev);
+    const body = document.querySelector('body');
+    let swipe = new Hammer(body);
+    swipe.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+    swipe.on('panleft panright panup pandown', function(ev) {
+        newGame.turnSnakeHead(ev);
     });
 
 
