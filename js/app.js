@@ -137,4 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', function (event){
         newGame.turnSnakeHead(event);
     });
+
+    const hammertime = new Hammer(document);
+    hammertime.on('swipeleft', function(ev) {
+        document.querySelector('h2').innerText = '000';
+        console.log('blablabla');
+        console.log(ev);
+    });
+
+
 });
