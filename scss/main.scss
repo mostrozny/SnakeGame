@@ -10,10 +10,14 @@
 }
 
 body {
+  color: white;
+  background-color: black;
   font-family: 'ARCADECLASSIC', sans-serif;
 }
 
 .container {
+  width: 99vw;
+  height: 99vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,7 +32,7 @@ body {
 
 .board {
   padding: 0px;
- border: 1px solid black;
+ border: 1px solid white;
 }
 .board div {
  // background-color: darkseagreen;
