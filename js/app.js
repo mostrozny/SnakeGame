@@ -26,21 +26,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        static toggleSnake() {
+            let snakeDivs = document.querySelector(".snake");
+            snakeDivs.classList.remove('snake');
+        };
+
         showSnake() {
 
             let self = this;
             this.cells[this.index(this.Snake.x, this.Snake.y)].classList.add('snake');
 
+
+            //SNAKE TAIL
             this.Snake.tail.unshift(this.index(this.Snake.x, this.Snake.y));
 
-           // console.log(this.Snake.tail);
             this.Snake.tail.forEach((element) => {
-               this.cells[element].classList.add('snake');
+                this.cells[element].classList.add('snake');
             });
 
-
-
-           if(this.Snake.tail.length-1 > this.Snake.total) {
+            if (this.Snake.tail.length - 1 > this.Snake.total) {
                 this.cells[this.Snake.tail.pop()].classList.remove('snake');
             }
         }
@@ -49,22 +53,25 @@ document.addEventListener('DOMContentLoaded', () => {
             this.cells[this.index(this.Mouse.x, this.Mouse.y)].classList.add('mouse');
         }
 
-        toggleSnake() {
-            let snakeDivs = document.querySelector(".snake");
-            snakeDivs.classList.remove('snake');
-        };
-
-        eatMouse (){
-            if (this.Snake.x === this.Mouse.x && this.Snake.y === this.Mouse.y){
+        eatMouse() {
+            if (this.Snake.x === this.Mouse.x && this.Snake.y === this.Mouse.y) {
+                const self = this;
                 document.querySelector('.mouse').classList.remove('mouse');
                 document.querySelector('h2').innerText++;
                 this.Snake.total++;
+                clearInterval(this.idSetInterval);
+                const multipler = this.Snake.total*6;
+
+                    this.startGame(250 - multipler);
+                
+
                 this.Mouse = new Mouse();
                 this.showMouse();
             }
         };
 
         turnSnakeHead(event) {
+            //desktop
             switch (event.which) {
                 case 37:
                     this.Snake.direction = 'left';
@@ -79,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     this.Snake.direction = 'down';
                     break;
             }
+            //mobiles
             switch (event.type) {
                 case 'panleft':
                     this.Snake.direction = 'left';
@@ -112,16 +120,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
             }
 
-            this.toggleSnake();
+            sGame.toggleSnake();
             this.showSnake();
             this.eatMouse();
         }
 
-        startGame() {
+        startGame(speed) {
             let self = this;
             this.idSetInterval = setInterval(function () {
                 self.moveSnake()
-            }, 250);
+            }, speed);
         };
     }
 
@@ -147,19 +155,22 @@ document.addEventListener('DOMContentLoaded', () => {
     newGame.createBoard();
     newGame.showMouse();
     newGame.showSnake();
-    newGame.startGame();
+    newGame.startGame(250);
 
-    document.addEventListener('keydown', function (event){
+
+    //****EVENT LISTENER
+    //Keyboard for desktops
+    document.addEventListener('keydown', function (event) {
         newGame.turnSnakeHead(event);
-        console.log(event);
     });
 
+    //Mobile gestures
     const body = document.querySelector('body');
     let swipe = new Hammer(body);
-    swipe.get('pan').set({ direction: Hammer.DIRECTION_ALL });
-    swipe.on('panleft panright panup pandown', function(ev) {
+    swipe.get('pan').set({direction: Hammer.DIRECTION_ALL});
+    swipe.on('panleft panright panup pandown', function (ev) {
         newGame.turnSnakeHead(ev);
     });
-
+    //****END EVENT LISTENER
 
 });
