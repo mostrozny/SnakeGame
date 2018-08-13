@@ -9,6 +9,10 @@
   src: url(../fonts/ARCADECLASSIC.TTF);
 }
 
+html, body {
+  position: fixed;
+}
+
 html {
   overflow: hidden;
 }
