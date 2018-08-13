@@ -33,10 +33,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             this.Snake.tail.unshift(this.index(this.Snake.x, this.Snake.y));
 
-            console.log(this.Snake.tail);
+           // console.log(this.Snake.tail);
+            this.Snake.tail.forEach((element) => {
+               this.cells[element].classList.add('snake');
+            });
 
-            if(this.Snake.tail.length > this.Snake.total) {
-                this.Snake.tail.pop();
+
+
+           if(this.Snake.tail.length-1 > this.Snake.total) {
+                this.cells[this.Snake.tail.pop()].classList.remove('snake');
             }
         }
 
