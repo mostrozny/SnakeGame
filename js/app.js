@@ -31,7 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
             let self = this;
             this.cells[this.index(this.Snake.x, this.Snake.y)].classList.add('snake');
 
+            this.Snake.tail.unshift(this.index(this.Snake.x, this.Snake.y));
 
+            console.log(this.Snake.tail);
+
+            if(this.Snake.tail.length > this.Snake.total) {
+                this.Snake.tail.pop();
+            }
         }
 
         showMouse() {
@@ -50,8 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 this.Snake.total++;
                 this.Mouse = new Mouse();
                 this.showMouse();
-                this.Snake.tail.push()
-              //  Mouse.showMouse();
             }
         };
 
@@ -118,13 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
             this.tail = [];
         }
     }
-
-    /*class SnakeTail {
-        constructor(){
-            this.tail = [84,83,82];
-        }
-    }*/
-
 
     const newGame = new sGame();
     newGame.createBoard();
