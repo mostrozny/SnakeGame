@@ -9,7 +9,12 @@
   src: url(../fonts/ARCADECLASSIC.TTF);
 }
 
+html {
+  overflow: hidden;
+}
+  
 body {
+  overflow: hidden;
   color: white;
   background-color: black;
   font-family: 'ARCADECLASSIC', sans-serif;

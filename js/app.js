@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const multipler = this.Snake.total*6;
 
                     this.startGame(250 - multipler);
-                
+
 
                 this.Mouse = new Mouse();
                 this.showMouse();
