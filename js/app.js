@@ -146,6 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 sGame.toggleSnake();
             }
         };
+        start(speed){
+            this.createBoard();
+            this.showMouse();
+            this.showSnake();
+            this.startGame(speed);
+        }
     }
 
 
@@ -166,11 +172,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    const newGame = new sGame();
-    newGame.createBoard();
-    newGame.showMouse();
-    newGame.showSnake();
-    newGame.startGame(250);
+    let newGame;
+    const startGame = () => {
+        $('.menu').addClass('invisible');
+        $('.score').removeClass('invisible');
+        $('.board').removeClass('invisible');
+        newGame = new sGame();
+        newGame.start(250);
+    }
+    //startGame();
+    $('.play').on('click', (e) =>{
+        $('.textEnter h1').removeClass('animated', 'pulse');
+       startGame();
+    });
+
 
 
     //****EVENT LISTENER

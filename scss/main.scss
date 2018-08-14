@@ -28,6 +28,18 @@ body {
   display: none;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  height: 80px;
+  width: 180px;
+  border: 1px solid white;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
 .container {
   width: 99vw;
   height: 90vh;
@@ -40,6 +52,7 @@ body {
 .textEnter {
   h1 {
     font-size: 3rem;
+
   }
 }
 
@@ -61,4 +74,21 @@ body {
 
 .mouse {
   background-color: lightslategray;
+}
+
+
+//animation
+@keyframes pulse {
+  0% {transform: scale(1); color: black;}
+  50% {transform: scale(1.1); color: white;}
+  100% {transform: scale(1); color: black;}
+}
+.pulse {
+  animation-name: pulse;
+ animation-duration: 1s;
+}
+.animated {
+  animation-duration: 2.5s;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
 }
