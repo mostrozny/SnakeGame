@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let newGame;
     const startGame = () => {
-        $('.menu').addClass('invisible');
+        $('.menu').toggle();
         $('.score').removeClass('invisible');
         $('.board').removeClass('invisible');
         newGame = new sGame();
@@ -199,10 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     //back in settings
-    $('.menu').on('click', '.back', (e) => {
-        $('.menu .setGroup').remove();
-        $('.menu .button').toggle();
-    });
+
 
 
     $('.highscore').on('click', (e) =>{
@@ -215,7 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
         menuSection.append(list, btnBack);
     });
 
-
+    $('.menu').on('click', '.back', (e) => {
+        $('.menu .setGroup').remove();
+        $('.menu .button').toggle();
+    });
 
 
     //****EVENT LISTENER
