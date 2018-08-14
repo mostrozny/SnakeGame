@@ -1,4 +1,4 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -59,14 +59,13 @@ body {
 .textEnter {
   h1 {
     font-size: 3rem;
-
+    color: chartreuse;
   }
 }
 
-
 .board {
   padding: 0;
- border: 1px solid white;
+  border: 1px solid white;
   div {
     // background-color: darkseagreen;
     float: left;
@@ -99,32 +98,44 @@ table {
 .setEasy {
   color: fuchsia;
 }
+
 .setMedium {
   color: chartreuse;
 }
+
 .setHard {
   color: red;
 }
 
 .snake {
-  background-color: darkseagreen;
+  background-color: chartreuse;
 }
 
 .mouse {
-  background-color: lightslategray;
+  background-color: grey;
 }
-
 
 //animation
 @keyframes pulse {
-  0% {transform: scale(1); color: black;}
-  50% {transform: scale(1.1); color: white;}
-  100% {transform: scale(1); color: black;}
+  0% {
+    transform: scale(1);
+    color: black;
+  }
+  50% {
+    transform: scale(1.1);
+    color: chartreuse;
+  }
+  100% {
+    transform: scale(1);
+    color: black;
+  }
 }
+
 .pulse {
   animation-name: pulse;
- animation-duration: 1s;
+  animation-duration: 1s;
 }
+
 .animated {
   animation-duration: 2.5s;
   animation-fill-mode: both;

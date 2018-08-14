@@ -60,9 +60,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('h2').innerText++;
                 this.Snake.total++;
                 clearInterval(this.idSetInterval);
-                const multipler = this.Snake.total*6;
+                const multipler = this.Snake.total * 6;
 
-                    this.startGame(250 - multipler);
+                this.startGame(250 - multipler);
 
 
                 this.Mouse = new Mouse();
@@ -132,21 +132,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 self.moveSnake()
             }, speed);
         };
-        gameOver (){
+
+        gameOver() {
             //WALL COLLIDE
             if (this.Snake.x < 0 || this.Snake.x > 19 || this.Snake.y < 0 || this.Snake.y > 19) {
-               console.log('collide');
+                console.log('collide');
                 window.clearInterval(this.idSetInterval);
                 sGame.toggleSnake();
             }
             //TAIL COLLIDE
-            if (this.Snake.tail.indexOf(this.index(this.Snake.x, this.Snake.y)) !== -1){
+            if (this.Snake.tail.indexOf(this.index(this.Snake.x, this.Snake.y)) !== -1) {
                 console.log('collide');
                 window.clearInterval(this.idSetInterval);
                 sGame.toggleSnake();
             }
         };
-        start(speed){
+
+        start(speed) {
             this.createBoard();
             this.showMouse();
             this.showSnake();
@@ -172,24 +174,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+
     let newGame;
+    let level = 250;
     const startGame = () => {
         $('.menu').toggle();
         $('.score').removeClass('invisible');
         $('.board').removeClass('invisible');
         newGame = new sGame();
-        newGame.start(250);
-    }
+        newGame.start(level);
+    };
 
     //startGame menu;
-    $('.play').on('click', (e) =>{
+    $('.play').on('click', (e) => {
         $('.textEnter h1').removeClass('animated', 'pulse');
-       startGame();
+        startGame();
     });
 
-    //settings menu
-    $('.settings').on('click', (e) =>{
+    //SETTINGS MENU
+    $('.settings').on('click', (e) => {
         $('.menu .button').toggle();
+        $('h1').text('SETTINGS');
         const menuSection = $('.menu');
         const btn1 = $('<div class="setGroup setEasy button">EASY</div>');
         const btn2 = $('<div class="setGroup setMedium button">MEDIUM</div>');
@@ -198,12 +203,24 @@ document.addEventListener('DOMContentLoaded', () => {
         menuSection.append(btn1, btn2, btn3, btn4);
     });
 
-    //back in settings
+    $('.menu').on('click', '.setEasy', (e) => {
+        level = 350;
+        $('h1').text('DIFFICULTY LEVEL: EASY')
+    });
+    $('.menu').on('click', '.setMedium', (e) => {
+        level = 250;
+        $('h1').text('DIFFICULTY LEVEL: MEDIUM')
+    });
+    $('.menu').on('click', '.setHard', (e) => {
+        level = 200;
+        $('h1').text('DIFFICULTY LEVEL: HARD')
+    });
 
 
-
-    $('.highscore').on('click', (e) =>{
+    //HIGHSCORE MENU
+    $('.highscore').on('click', (e) => {
         $('.menu .button').toggle();
+        $('h1').text('HIGHSCORE');
         const menuSection = $('.menu');
         const highscoresRefresh = $('.highscores table');
         const list = $('<div class="setGroup highscoreList"></div>');
@@ -212,9 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
         menuSection.append(list, btnBack);
     });
 
+    //BACK IN MENUS
     $('.menu').on('click', '.back', (e) => {
         $('.menu .setGroup').remove();
         $('.menu .button').toggle();
+        $('h1').text('SSSSNAKE');
     });
 
 
