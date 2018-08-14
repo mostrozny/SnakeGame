@@ -180,11 +180,41 @@ document.addEventListener('DOMContentLoaded', () => {
         newGame = new sGame();
         newGame.start(250);
     }
-    //startGame();
+
+    //startGame menu;
     $('.play').on('click', (e) =>{
         $('.textEnter h1').removeClass('animated', 'pulse');
        startGame();
     });
+
+    //settings menu
+    $('.settings').on('click', (e) =>{
+        $('.menu .button').toggle();
+        const menuSection = $('.menu');
+        const btn1 = $('<div class="setGroup setEasy button">EASY</div>');
+        const btn2 = $('<div class="setGroup setMedium button">MEDIUM</div>');
+        const btn3 = $('<div class="setGroup setHard button">HARD</div>');
+        const btn4 = $('<div class="setGroup back button">BACK</div>');
+        menuSection.append(btn1, btn2, btn3, btn4);
+    });
+
+    //back in settings
+    $('.menu').on('click', '.back', (e) => {
+        $('.menu .setGroup').remove();
+        $('.menu .button').toggle();
+    });
+
+
+    $('.highscore').on('click', (e) =>{
+        $('.menu .button').toggle();
+        const menuSection = $('.menu');
+        const highscoresRefresh = $('.highscores table');
+        const list = $('<div class="setGroup highscoreList"></div>');
+        list.append(highscoresRefresh);
+        const btnBack = $('<div class="setGroup back button">BACK</div>');
+        menuSection.append(list, btnBack);
+    });
+
 
 
 

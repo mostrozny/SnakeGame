@@ -28,6 +28,13 @@ body {
   display: none;
 }
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .button {
   display: flex;
   justify-content: center;
@@ -56,16 +63,47 @@ body {
   }
 }
 
+
 .board {
-  padding: 0px;
+  padding: 0;
  border: 1px solid white;
+  div {
+    // background-color: darkseagreen;
+    float: left;
+    // border: 0.5px solid black;
+    width: 10px;
+    height: 10px;
+  }
 }
-.board div {
- // background-color: darkseagreen;
-  float: left;
- // border: 0.5px solid black;
-  width: 10px;
-  height: 10px;
+
+table {
+  font-size: 1.4rem;
+  tr, td, th {
+    margin: 10px;
+    padding: 10px;
+  }
+  th {
+    color: blue;
+  }
+  tr:nth-of-type(3n+1) {
+    color: chartreuse;
+  }
+  tr:nth-of-type(3n+2) {
+    color: cyan;
+  }
+  tr:nth-of-type(3n+3) {
+    color: fuchsia;
+  }
+}
+
+.setEasy {
+  color: fuchsia;
+}
+.setMedium {
+  color: chartreuse;
+}
+.setHard {
+  color: red;
 }
 
 .snake {
