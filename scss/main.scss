@@ -115,6 +115,21 @@ table {
   background-color: grey;
 }
 
+.endGame form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.4rem;
+  h2 {
+    color: red;
+    font-size: 1.8rem;
+  }
+  div {
+    margin: 10px;
+  }
+}
+
 //animation
 @keyframes pulse {
   0% {
@@ -130,6 +145,8 @@ table {
     color: black;
   }
 }
+
+
 
 .pulse {
   animation-name: pulse;

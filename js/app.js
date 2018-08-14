@@ -138,14 +138,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.Snake.x < 0 || this.Snake.x > 19 || this.Snake.y < 0 || this.Snake.y > 19) {
                 console.log('collide');
                 window.clearInterval(this.idSetInterval);
-                sGame.toggleSnake();
+               // sGame.toggleSnake();
+                endGame();
             }
             //TAIL COLLIDE
             if (this.Snake.tail.indexOf(this.index(this.Snake.x, this.Snake.y)) !== -1) {
                 console.log('collide');
                 window.clearInterval(this.idSetInterval);
-                sGame.toggleSnake();
+               // sGame.toggleSnake();
+                endGame();
             }
+
+
         };
 
         start(speed) {
@@ -185,6 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
         newGame.start(level);
     };
 
+
+
+
+
     //startGame menu;
     $('.play').on('click', (e) => {
         $('.textEnter h1').removeClass('animated', 'pulse');
@@ -205,15 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     $('.menu').on('click', '.setEasy', (e) => {
         level = 350;
-        $('h1').text('DIFFICULTY LEVEL: EASY')
+        $('h1').text('SET: EASY')
     });
     $('.menu').on('click', '.setMedium', (e) => {
         level = 250;
-        $('h1').text('DIFFICULTY LEVEL: MEDIUM')
+        $('h1').text('SET: MEDIUM')
     });
     $('.menu').on('click', '.setHard', (e) => {
         level = 200;
-        $('h1').text('DIFFICULTY LEVEL: HARD')
+        $('h1').text('SET: HARD')
     });
 
 
@@ -236,6 +244,16 @@ document.addEventListener('DOMContentLoaded', () => {
         $('h1').text('SSSSNAKE');
     });
 
+    //END GAME
+    const endGame = () => {
+        $('.score').toggle();
+        $('.board').toggle();
+        $('.endGame').toggle();
+        $('.endGame span').text(newGame.Snake.total);
+    };
+    $("form .button").on('click', function(e) {
+            $('form').submit();
+    });
 
     //****EVENT LISTENER
     //Keyboard for desktops
