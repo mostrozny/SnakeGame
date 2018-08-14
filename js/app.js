@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             sGame.toggleSnake();
+            this.gameOver();
             this.showSnake();
             this.eatMouse();
         }
@@ -130,6 +131,20 @@ document.addEventListener('DOMContentLoaded', () => {
             this.idSetInterval = setInterval(function () {
                 self.moveSnake()
             }, speed);
+        };
+        gameOver (){
+            //WALL COLLIDE
+            if (this.Snake.x < 0 || this.Snake.x > 19 || this.Snake.y < 0 || this.Snake.y > 19) {
+               console.log('collide');
+                window.clearInterval(this.idSetInterval);
+                sGame.toggleSnake();
+            }
+            //TAIL COLLIDE
+            if (this.Snake.tail.indexOf(this.index(this.Snake.x, this.Snake.y)) !== -1){
+                console.log('collide');
+                window.clearInterval(this.idSetInterval);
+                sGame.toggleSnake();
+            }
         };
     }
 
