@@ -209,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const btn3 = $('<div class="setGroup setHard button">HARD</div>');
         const btn4 = $('<div class="setGroup back button">BACK</div>');
         menuSection.append(btn1, btn2, btn3, btn4);
+
     });
 
     $('.menu').on('click', '.setEasy', (e) => {
