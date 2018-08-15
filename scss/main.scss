@@ -128,6 +128,20 @@ table {
   div {
     margin: 10px;
   }
+  input[type=text] {
+    font-family: 'ARCADECLASSIC', sans-serif;
+    font-size: 1.4rem;
+    background-color: black;
+    color: cyan;
+    border: none;
+    border-bottom: 2px white dashed;
+    padding: 2px;
+    &:focus {
+      border: none;
+      border-bottom: 2px fuchsia dashed;
+      outline: none;
+    }
+  }
 }
 
 //animation
