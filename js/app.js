@@ -53,6 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
             this.cells[this.index(this.Mouse.x, this.Mouse.y)].classList.add('mouse');
         }
 
+        showSuperMouse() {
+            this.cells[this.index(this.Mouse.x, this.Mouse.y)].classList.add('superMouse');
+        }
+
+
         eatMouse() {
             if (this.Snake.x === this.Mouse.x && this.Snake.y === this.Mouse.y) {
                 const self = this;
@@ -162,6 +167,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     class Mouse {
+        constructor() {
+            this.x = Math.floor(Math.random() * 20);
+            this.y = Math.floor(Math.random() * 20);
+        }
+    }
+
+    class SuperMouse {
         constructor() {
             this.x = Math.floor(Math.random() * 20);
             this.y = Math.floor(Math.random() * 20);
