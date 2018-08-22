@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             this.cells = [];
             this.Mouse = new Mouse();
+            this.superMouse = new SuperMouse();
             this.Snake = new Snake();
         }
 
@@ -54,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         showSuperMouse() {
-            this.cells[this.index(this.Mouse.x, this.Mouse.y)].classList.add('superMouse');
+            this.cells[this.index(this.superMouse.x, this.superMouse.y)].classList.add('superMouse');
         }
 
 
@@ -72,6 +73,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 this.Mouse = new Mouse();
                 this.showMouse();
+            }
+        };
+
+        eatSuperMouse() {
+            if (this.Snake.x === this.superMouse.x && this.Snake.y === this.superMouse.y) {
+                const self = this;
+                document.querySelector('.superMouse').classList.remove('superMouse');
+                document.querySelector('h2').innerText++;
+                this.Snake.total++;
+                clearInterval(this.idSetInterval);
+                const multipler = this.Snake.total * 6;
+
+                this.startGame(250 - multipler);
+
+
+                this.superMouse = new SuperMouse();
+                this.showSuperMouse();
             }
         };
 
@@ -128,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sGame.toggleSnake();
             this.gameOver();
             this.showSnake();
+            this.eatSuperMouse();
             this.eatMouse();
         }
 
@@ -160,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         start(speed) {
             this.createBoard();
             this.showMouse();
+            this.showSuperMouse();
             this.showSnake();
             this.startGame(speed);
         }
