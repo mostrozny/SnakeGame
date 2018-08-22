@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.querySelector('.mouse').classList.remove('mouse');
                 document.querySelector('h2').innerText++;
                 this.Snake.total++;
+                this.Snake.score++;
                 clearInterval(this.idSetInterval);
                 const multipler = this.Snake.total * 6;
 
@@ -79,17 +80,16 @@ document.addEventListener('DOMContentLoaded', () => {
         eatSuperMouse() {
             if (this.Snake.x === this.superMouse.x && this.Snake.y === this.superMouse.y) {
                 const self = this;
+                const h2 = document.querySelector('h2');
                 document.querySelector('.superMouse').classList.remove('superMouse');
-                document.querySelector('h2').innerText++;
-                this.Snake.total++;
+                h2.innerText = Number(h2.innerText) + 20;
+                this.Snake.score = this.Snake.score + 20;
+            //    this.Snake.total = this.Snake.total + 20;
                 clearInterval(this.idSetInterval);
-                const multipler = this.Snake.total * 6;
-
-                this.startGame(250 - multipler);
 
 
-                this.superMouse = new SuperMouse();
-                this.showSuperMouse();
+                this.startGame(250 - this.Snake.total);
+
             }
         };
 
@@ -146,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
             sGame.toggleSnake();
             this.gameOver();
             this.showSnake();
+
             this.eatSuperMouse();
             this.eatMouse();
         }
@@ -179,7 +180,10 @@ document.addEventListener('DOMContentLoaded', () => {
         start(speed) {
             this.createBoard();
             this.showMouse();
-            this.showSuperMouse();
+            this.intervalShowSuperSnake = setTimeout(() => {
+                this.showSuperMouse(true);
+                clearTimeout(this.intervalShowSuperSnake);
+            }, 1000 * ~~(Math.random()*20) + 10);
             this.showSnake();
             this.startGame(speed);
         }
@@ -205,6 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
             this.x = 4;
             this.y = 4;
             this.direction = 'right';
+            this.score = 0;
             this.total = 0;
             this.tail = [];
         }
@@ -282,7 +287,7 @@ document.addEventListener('DOMContentLoaded', () => {
         $('.score').toggle();
         $('.board').toggle();
         $('.endGame').toggle();
-        $('.endGame span').text(newGame.Snake.total);
+        $('.endGame span').text(newGame.Snake.score);
     };
     $("form .button").on('click', function(e) {
             $('form').submit();
