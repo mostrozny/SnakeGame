@@ -1,4 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
+    //FIREBASE DECLARATION
+    const config = {
+        apiKey: "AIzaSyBcCjzXzr9JmksAdnqFxZXxgyZZBuRoZ0E",
+        authDomain: "snakegame-23df0.firebaseapp.com",
+        databaseURL: "https://snakegame-23df0.firebaseio.com",
+        projectId: "snakegame-23df0",
+        storageBucket: "",
+        messagingSenderId: "679166626893"
+    };
+    firebase.initializeApp(config);
+    const database = firebase.database();
+
+    test = () => {
+        return database.ref('highscores').once('value').then(function(snapshot) {
+            console.log(snapshot.val())});
+    };
+    console.log(test());
+
 
     /*abstract*/
     class sGame {
