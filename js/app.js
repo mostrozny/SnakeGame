@@ -11,12 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     firebase.initializeApp(config);
     const database = firebase.database();
 
-    test = () => {
-        return database.ref('highscores').once('value').then(function(snapshot) {
-            console.log(snapshot.val())});
-    };
-    console.log(test());
-
 
     /*abstract*/
     class sGame {
@@ -267,6 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+
     $('.menu').on('click', '.setEasy', (e) => {
         level = 350;
         $('h1').text('SET: EASY')
@@ -282,6 +277,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //HIGHSCORE MENU
+    let highscoresArray = [];
+
+    const get = () => {
+        return database.ref('highscores').once('value')
+            .then((snapshot) => {
+                const lengthHighscores = snapshot.val().highscores.length;
+                const data = snapshot.val().highscores;
+                for (let i=0; i<lengthHighscores; i++) {
+                    highscoresArray.push(data[i]);
+                }
+                console.log(highscoresArray)
+            });
+    };
+    get();
+
+    const makeRows = () => {
+        const mappedHighscores = highscoresArray.map(x => return
+        )
+    }
+
+
     $('.highscore').on('click', (e) => {
         $('.menu .button').toggle();
         $('h1').text('HIGHSCORE');
@@ -292,6 +308,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const btnBack = $('<div class="setGroup back button">BACK</div>');
         menuSection.append(list, btnBack);
     });
+
+
+
 
     //BACK IN MENUS
     $('.menu').on('click', '.back', (e) => {
