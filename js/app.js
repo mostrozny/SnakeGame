@@ -292,10 +292,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     get();
 
-    const makeRows = () => {
+  /*  const makeRows = () => {
         const mappedHighscores = highscoresArray.map(x => return
         )
-    }
+    }*/
 
 
     $('.highscore').on('click', (e) => {
